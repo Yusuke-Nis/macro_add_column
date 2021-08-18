@@ -1,0 +1,20 @@
+Sub Main
+
+ Worksheets("Sheet1").Columns(1).Insert
+ Columns(2).Copy   ' B 列をコピー
+ Columns(3).PasteSpecial (xlPasteValues)   ' C 列に貼り付け,値のみ．
+ Range("C1").Formula = "=A1+B1" ' 指定セルに数式を入力, 日付を更新．
+ Range("C2")="更新は赤，協議事項は青"
+ ActiveCell.Characters(Start:=4, Length:=1).Font.ColorIndex = RGB(255, 0, 0)
+ ActiveCell.Characters(Start:=11, Length:=1).Font.ColorIndex = RGB(0, 0, 255)
+ 
+ Columns(2).Hidden = True  ' B 列を非表示
+
+ ActiveSheet.Shapes("ひし形 1").Left = Range("J2").Left ' 図形移動．日付のラインを右に1列移動．
+
+ Worksheets("Sheet2").Columns(1).Insert ' コントロールページ．次回更新日の更新．
+ Range("B1").Copy
+ Range("C1").Copy.PasteSpecial (xlPasteValues)
+ 
+ 
+End Sub
